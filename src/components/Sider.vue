@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div><p>placeholder</p></div>
+  <div><p>搜索，排序功能区</p></div>
   <NoteList></NoteList>
 </div>
   
