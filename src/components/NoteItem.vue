@@ -1,18 +1,22 @@
 <template>
 <div>
-  <div><p>placeholder</p></div>
-  <NoteList></NoteList>
+  <el-row>
+    <el-col :span="16">
+      <span>{{title}}</span>
+    </el-col>
+    <el-col :span="6" :offset="2">
+      {{time}}
+    </el-col>
+  </el-row>
 </div>
-  
 </template>
-
 <script>
-import  NoteList  from "./NoteList.vue"
 export default {
-  name: 'Sider',
+  name: 'NoteItem',
   components: {
-    NoteList
+    
   },
+  props:["title", "time"],
   data() {
     return {
       
@@ -29,7 +33,6 @@ export default {
   }
 }
 </script>
-
 <style>
   
 </style>

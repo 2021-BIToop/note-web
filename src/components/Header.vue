@@ -11,31 +11,31 @@
 </template>
 <script>
 import Login from './Login.vue';
-  export default {
-    name: 'Header',
-      components: {
-        Login
-      },
-    data() {
-      return {
-        loginVisible: false
-      }
+export default {
+  name: 'Header',
+    components: {
+      Login
     },
-    methods:{
-      openLogin(){
-        this.loginVisible = true
-      },
-      closeLogin(){
-        this.loginVisible = false
-      },
-    },
-    computed:{
-      
-    },
-    watch: {
-      
+  data() {
+    return {
+      loginVisible: false
     }
+  },
+  methods:{
+    openLogin(){
+      this.loginVisible = true
+    },
+    closeLogin(){
+      this.loginVisible = false
+    },
+  },
+  computed:{
+    
+  },
+  watch: {
+    
   }
+}
 </script>
 <style>
   
