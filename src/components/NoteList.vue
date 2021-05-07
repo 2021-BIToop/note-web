@@ -19,7 +19,7 @@
       </template>
       <el-row class="description_bar">
         <el-col :span="20">
-          <span>创建于 {{ cat.created_time }}</span>
+          <span>创建于 {{ cat.createTime }}</span>
         </el-col>
         <el-col :span="2" :offset="1">
           <el-button
@@ -48,6 +48,7 @@ export default {
   components: {
     NoteItem,
   },
+  params: ["topicList"],
   data() {
     return {
       activeNames: [],
@@ -56,7 +57,7 @@ export default {
         {
           id: 1,
           rank: 0,
-          created_time: "2021/02/22",
+          createdTime: "2021/02/22",
           catname: "默认分类",
           notes: [
             {

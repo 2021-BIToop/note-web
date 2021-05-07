@@ -64,9 +64,9 @@ export default {
             })
             this.$emit("close")
           })
-          .catch(() => {
+          .catch((res) => {
             this.$message({
-              message: "登陆失败，请重试",
+              message: res.response.data.detail,
               type: "warning",
               duration: 1000,
             })

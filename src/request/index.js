@@ -1,7 +1,7 @@
 import axios from "axios"
 
-// const HOST = "/host"
-const HOST = "http://10.1.139.94/"
+const HOST = "/host"
+// const HOST = "http://10.1.139.94/"
 
 const base = {
   sign_up: "/sign_up/",
@@ -9,10 +9,10 @@ const base = {
   user: "/user/",
   add_topic: "/add_topic/",
   topic_id: "/topic/",
-  topics: "/topics/",
+  topics: "/topic_list/",
   add_note: "/add_note/",
   note_id: "/note/",
-  notes: "/notes/",
+  notes: "/note_list/",
 }
 
 const request = axios.create({
@@ -81,6 +81,15 @@ export function addTopicApi(query) {
     url: base.add_topic,
     method: "post",
     data: query,
+    responseType: "json",
+  })
+}
+
+export function topicListApi(query) {
+  return request({
+    url: base.topics,
+    method: "get",
+    params: query,
     responseType: "json",
   })
 }

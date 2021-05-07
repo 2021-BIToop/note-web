@@ -2,7 +2,7 @@
   <div>
     <el-row class="search_bar">
       <el-col :span="18">
-        <el-input size="mini" v-model="searchKey"></el-input>
+        <el-input size="mini" v-model="search_key"></el-input>
       </el-col>
       <el-col :span="4" :offset="1">
         <el-button
@@ -33,13 +33,13 @@
         @click="search"
       ></el-button>
     </el-row>
-    <NoteList></NoteList>
+    <NoteList :topic_list="this.topic_list"></NoteList>
   </div>
 </template>
 
 <script>
 import NoteList from "./NoteList.vue"
-import { addTopicApi } from "request"
+import { addTopicApi, topicListApi } from "request"
 export default {
   name: "Sider",
   components: {
@@ -47,16 +47,17 @@ export default {
   },
   data() {
     return {
-      searchKey: "",
+      search_key: "",
+      topic_list: [],
     }
   },
   methods: {
     search() {},
-    add_topic() {
+    addTopic() {
       let data = {
         name: "新分类",
         rank: 0,
-        user_id: this.$store.getters.hasLogin,
+        user_id: this.$store.state.has_login,
       }
       addTopicApi(data)
         .then((res) => {
@@ -75,9 +76,38 @@ export default {
           })
         })
     },
+    getTopicList() {
+      let data = {
+        user_id: this.$store.state.has_login,
+      }
+      topicListApi(data)
+        .then((res) => {
+          res.data.forEach((element) => {
+            this.topicList.push(element)
+          })
+        })
+        .catch((err) => {
+          console.log(err.response.data.detail)
+        })
+    },
   },
-  computed: {},
-  watch: {},
+  computed: {
+    loginState() {
+      return this.$store.getters.hasLogin
+    },
+  },
+  watch: {
+    loginState() {
+      if (this.loginState) {
+        this.getTopicList()
+      }
+    },
+  },
+  mounted() {
+    if (this.$store.getters.hasLogin) {
+      this.getTopicList()
+    }
+  },
 }
 </script>
 

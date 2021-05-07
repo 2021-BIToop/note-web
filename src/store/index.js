@@ -34,14 +34,15 @@ export default createStore({
           .then((res) => {
             if (parseInt(res.status / 100) === 2) {
               userApi(form.username)
-                .then((user) => {
+                .then((r) => {
+                  let user = r.data
                   context.commit("changeStatus", {
-                    has_login: user.uid,
+                    has_login: user.user_id,
                     username: form.username,
                     password: form.password,
                   })
                   setTocken({
-                    has_login: user.uid,
+                    has_login: user.user_id,
                     username: form.username,
                     password: form.password,
                   })
