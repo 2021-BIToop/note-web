@@ -12,6 +12,9 @@ export default createStore({
     hasLogin(state) {
       return state.has_login != ""
     },
+    username(state) {
+      return state.username
+    },
   },
   mutations: {
     changeStatus(state, form) {
@@ -30,7 +33,7 @@ export default createStore({
         signinApi(form)
           .then((res) => {
             if (parseInt(res.status / 100) === 2) {
-              userApi()
+              userApi(form.username)
                 .then((user) => {
                   context.commit("changeStatus", {
                     has_login: user.uid,

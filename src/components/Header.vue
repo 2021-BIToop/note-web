@@ -1,8 +1,10 @@
 <template>
   <el-row>
-    <el-col :span="6"> TITLE <a href="#" @click="test">test</a></el-col>
+    <el-col :span="6"> TITLE</el-col>
     <el-col :span="6" :offset="12">
-      <a v-if="hasLogin" href="#" @click="logout">LOGOUT</a>
+      <span v-if="hasLogin">
+        {{ username }}/<a href="#" @click="logout">LOGOUT</a>
+      </span>
       <a v-else href="#" @click="openLogin">LOGIN</a>
     </el-col>
   </el-row>
@@ -10,7 +12,6 @@
 </template>
 <script>
 import Login from "./Login.vue"
-import { topicIdApi } from "request"
 export default {
   name: "Header",
   components: {
@@ -22,15 +23,6 @@ export default {
     }
   },
   methods: {
-    test() {
-      topicIdApi({ topic_id: 1 })
-        .then((res) => {
-          console.log(res)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
     openLogin() {
       this.loginVisible = true
     },
@@ -44,6 +36,9 @@ export default {
   computed: {
     hasLogin() {
       return this.$store.getters.hasLogin
+    },
+    username() {
+      return this.$store.getters.username
     },
   },
   watch: {},

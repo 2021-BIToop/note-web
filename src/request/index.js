@@ -1,6 +1,7 @@
 import axios from "axios"
 
-const HOST = "/host"
+// const HOST = "/host"
+const HOST = "http://10.1.139.94/"
 
 const base = {
   sign_up: "/sign_up/",
@@ -17,7 +18,7 @@ const base = {
 const request = axios.create({
   baseURL: HOST,
   timeout: 5000,
-  withCredentials: true,
+  withCredentials: false,
 })
 
 // 实例，主动检索，通过关键词查找
@@ -60,8 +61,8 @@ export function signupApi(query) {
 export function userApi(query) {
   return request({
     url: base.user,
-    method: "post",
-    params: query,
+    method: "get",
+    params: { username: query },
     responseType: "json",
   })
 }
