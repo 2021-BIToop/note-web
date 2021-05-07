@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-col :span="6"> TITLE</el-col>
+    <el-col :span="6"> LOGO</el-col>
     <el-col :span="6" :offset="12">
       <span v-if="hasLogin">
         {{ username }}/<a href="#" @click="logout">LOGOUT</a>
