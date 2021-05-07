@@ -24,7 +24,7 @@
         icon="el-icon-folder-add"
         circle
         size="mini"
-        @click="search"
+        @click="add_topic"
       ></el-button>
       <el-button
         icon="el-icon-circle-plus-outline"
@@ -39,6 +39,7 @@
 
 <script>
 import NoteList from "./NoteList.vue"
+import { addTopicApi } from "request"
 export default {
   name: "Sider",
   components: {
@@ -51,6 +52,29 @@ export default {
   },
   methods: {
     search() {},
+    add_topic() {
+      let data = {
+        name: "新分类",
+        rank: 0,
+        user_id: this.$store.getters.hasLogin,
+      }
+      addTopicApi(data)
+        .then((res) => {
+          console.log(res)
+          this.$message({
+            message: "新分类创建成功",
+            type: "success",
+            duration: 1000,
+          })
+        })
+        .catch((err) => {
+          this.$message({
+            message: err.response.data.detail,
+            type: "warning",
+            duration: 1000,
+          })
+        })
+    },
   },
   computed: {},
   watch: {},

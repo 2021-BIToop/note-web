@@ -75,3 +75,12 @@ export function topicIdApi(query) {
     responseType: "json",
   })
 }
+
+export function addTopicApi(query) {
+  return request({
+    url: base.add_topic,
+    method: "post",
+    data: query,
+    responseType: "json",
+  })
+}

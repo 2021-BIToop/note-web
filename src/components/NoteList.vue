@@ -1,11 +1,22 @@
 <template>
-  <el-collapse accordion>
+  <el-collapse accordion v-model="activeNames" @change="handleChange">
     <el-collapse-item
       v-for="(cat, index) in categories"
       :key="index"
-      :title="cat.catname"
       :name="cat.id"
+      :disabled="this.isEdit"
+      @dblclick="this.isEdit = true"
     >
+      <template #title>
+        <el-input
+          v-if="isEdit"
+          size="mini"
+          v-model="cat.catname"
+          @blur="editCatName"
+        >
+        </el-input>
+        <span v-else>{{ cat.catname }}</span>
+      </template>
       <el-row class="description_bar">
         <el-col :span="20">
           <span>创建于 {{ cat.created_time }}</span>
@@ -39,6 +50,8 @@ export default {
   },
   data() {
     return {
+      activeNames: [],
+      isEdit: false,
       categories: [
         {
           id: 1,
@@ -61,7 +74,15 @@ export default {
       ],
     }
   },
-  methods: {},
+  methods: {
+    editCatName() {
+      this.isEdit = false
+    },
+    handleChange(val) {
+      console.log(val)
+      console.log(this.activeNames)
+    },
+  },
   computed: {},
   watch: {},
 }
