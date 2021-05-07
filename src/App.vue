@@ -1,5 +1,5 @@
 <template>
-  <router-view/>
+  <router-view />
 </template>
 
 <style>
@@ -9,6 +9,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  height: 100%;
 }
 
 #nav {
@@ -22,5 +23,11 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+body,
+html {
+  height: 100%;
+  margin-block: 0;
 }
 </style>
