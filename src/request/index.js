@@ -93,3 +93,12 @@ export function topicListApi(query) {
     responseType: "json",
   })
 }
+
+export function noteListApi(query) {
+  return request({
+    url: base.notes,
+    method: "get",
+    params: query,
+    responseType: "json",
+  })
+}

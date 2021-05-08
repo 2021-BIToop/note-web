@@ -24,7 +24,7 @@
         icon="el-icon-folder-add"
         circle
         size="mini"
-        @click="add_topic"
+        @click="addTopic"
       ></el-button>
       <el-button
         icon="el-icon-circle-plus-outline"
@@ -39,7 +39,7 @@
 
 <script>
 import NoteList from "./NoteList.vue"
-import { addTopicApi, topicListApi } from "request"
+import { addTopicApi, topicListApi, noteListApi } from "request"
 export default {
   name: "Sider",
   components: {
@@ -67,6 +67,7 @@ export default {
             type: "success",
             duration: 1000,
           })
+          this.getTopicList()
         })
         .catch((err) => {
           this.$message({
@@ -83,12 +84,29 @@ export default {
       topicListApi(data)
         .then((res) => {
           res.data.forEach((element) => {
-            this.topicList.push(element)
+            this.topic_list.push(element)
+            this.getNotes()
           })
         })
         .catch((err) => {
           console.log(err.response.data.detail)
         })
+    },
+    getNotes() {
+      this.topic_list.forEach((element) => {
+        let data = {
+          user_id: this.$store.state.has_login,
+          topic_id: element.topic_id,
+        }
+        noteListApi(data)
+          .then((res) => {
+            element.notes = res.data
+            console.log(this.topic_list)
+          })
+          .catch((err) => {
+            console.log(err.response.data.detail)
+          })
+      })
     },
   },
   computed: {
