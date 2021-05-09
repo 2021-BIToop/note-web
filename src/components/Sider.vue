@@ -29,7 +29,7 @@
     </el-row>
     <NoteList
       ref="NoteList"
-      @addNoteRefresh="addNoteRefresh"
+      @refresh="refresh"
       @editTopicName="editTopicName"
     ></NoteList>
   </div>
@@ -131,9 +131,6 @@ export default {
             }
           })
       })
-    },
-    addNoteRefresh() {
-      this.refresh()
     },
     refresh() {
       this.getTopicList()

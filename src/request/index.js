@@ -11,6 +11,7 @@ const base = {
   topic_id: "/topic/",
   topics: "/topic_list/",
   update_topic: "/update_topic/",
+  remove_topic: "/remove_topic/",
   add_note: "/add_note/",
   note_id: "/note/",
   notes: "/note_list/",
@@ -118,6 +119,15 @@ export function updateTopicApi(query) {
     url: base.update_topic,
     method: "post",
     data: query,
+    responseType: "json",
+  })
+}
+
+export function removeTopicApi(query) {
+  return request({
+    url: base.remove_topic,
+    method: "post",
+    params: query,
     responseType: "json",
   })
 }

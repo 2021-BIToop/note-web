@@ -51,7 +51,7 @@
 </template>
 <script>
 import NoteItem from "./NoteItem.vue"
-import { addNoteApi } from "request"
+import { addNoteApi, removeTopicApi } from "request"
 import moment from "moment"
 export default {
   name: "NoteList",
@@ -116,7 +116,7 @@ export default {
             type: "success",
             duration: 1000,
           })
-          this.$emit("addNoteRefresh")
+          this.$emit("refresh")
         })
         .catch((err) => {
           this.$message({
@@ -139,7 +139,29 @@ export default {
       // })
       // console.log(topic_list)
     },
-    deleteTopic() {},
+    deleteTopic() {
+      let data = {
+        user_id: this.$store.state.has_login,
+        topic_id: this.activeNames,
+      }
+      removeTopicApi(data)
+        .then((res) => {
+          console.log(res)
+          this.$message({
+            message: "删除成功",
+            type: "success",
+            duration: 1000,
+          })
+          this.$emit("refresh")
+        })
+        .catch((err) => {
+          this.$message({
+            message: err.response.data.detail,
+            type: "warning",
+            duration: 1000,
+          })
+        })
+    },
     date(raw) {
       // console.log(moment(raw).format("YYYY/MM/DD"))
       return moment(raw).format("YYYY/MM/DD")
