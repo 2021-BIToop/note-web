@@ -42,8 +42,9 @@
       <NoteItem
         v-for="(note, index) in cat.notes"
         :key="index"
-        :title="note.title"
+        :note="note"
         :time="date(note.modified_time)"
+        @deleteNote="deleteNote"
       >
       </NoteItem>
     </el-collapse-item>
@@ -51,7 +52,7 @@
 </template>
 <script>
 import NoteItem from "./NoteItem.vue"
-import { addNoteApi, removeTopicApi } from "request"
+import { addNoteApi, removeTopicApi, removeNoteApi } from "request"
 import moment from "moment"
 export default {
   name: "NoteList",
@@ -145,6 +146,25 @@ export default {
         topic_id: this.activeNames,
       }
       removeTopicApi(data)
+        .then((res) => {
+          console.log(res)
+          this.$message({
+            message: "删除成功",
+            type: "success",
+            duration: 1000,
+          })
+          this.$emit("refresh")
+        })
+        .catch((err) => {
+          this.$message({
+            message: err.response.data.detail,
+            type: "warning",
+            duration: 1000,
+          })
+        })
+    },
+    deleteNote(data) {
+      removeNoteApi(data)
         .then((res) => {
           console.log(res)
           this.$message({
