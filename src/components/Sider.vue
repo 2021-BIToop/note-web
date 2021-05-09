@@ -15,10 +15,10 @@
     </el-row>
     <el-row class="control_bar">
       <el-button
-        icon="el-icon-search"
+        icon="el-icon-refresh"
         circle
         size="mini"
-        @click="search"
+        @click="refresh"
       ></el-button>
       <el-button
         icon="el-icon-folder-add"
@@ -26,20 +26,18 @@
         size="mini"
         @click="addTopic"
       ></el-button>
-      <el-button
-        icon="el-icon-circle-plus-outline"
-        circle
-        size="mini"
-        @click="search"
-      ></el-button>
     </el-row>
-    <NoteList :topic_list="this.topic_list"></NoteList>
+    <NoteList
+      ref="NoteList"
+      @addNoteRefresh="addNoteRefresh"
+      @editTopicName="editTopicName"
+    ></NoteList>
   </div>
 </template>
 
 <script>
 import NoteList from "./NoteList.vue"
-import { addTopicApi, topicListApi, noteListApi } from "request"
+import { addTopicApi, topicListApi, noteListApi, updateTopicApi } from "request"
 export default {
   name: "Sider",
   components: {
@@ -47,12 +45,29 @@ export default {
   },
   data() {
     return {
+      flag: true,
       search_key: "",
       topic_list: [],
     }
   },
   methods: {
     search() {},
+    editTopicName(cat) {
+      let data = {
+        topic_id: cat.topic_id,
+        name: cat.name,
+        rank: cat.rank,
+        user_id: cat.user_id,
+      }
+      updateTopicApi(data)
+        .then((res) => {
+          console.log(res)
+          this.refresh()
+        })
+        .catch((err) => {
+          console.log(err.response.data.detail)
+        })
+    },
     addTopic() {
       let data = {
         name: "新分类",
@@ -67,7 +82,7 @@ export default {
             type: "success",
             duration: 1000,
           })
-          this.getTopicList()
+          this.refresh()
         })
         .catch((err) => {
           this.$message({
@@ -78,19 +93,24 @@ export default {
         })
     },
     getTopicList() {
-      let data = {
-        user_id: this.$store.state.has_login,
-      }
-      topicListApi(data)
-        .then((res) => {
-          res.data.forEach((element) => {
-            this.topic_list.push(element)
-            this.getNotes()
+      return new Promise((resolve, reject) => {
+        let data = {
+          user_id: this.$store.state.has_login,
+        }
+        topicListApi(data)
+          .then((res) => {
+            this.topic_list = []
+            res.data.forEach((element) => {
+              this.topic_list.push(element)
+              this.getNotes()
+            })
+            resolve("success")
           })
-        })
-        .catch((err) => {
-          console.log(err.response.data.detail)
-        })
+          .catch((err) => {
+            console.log(err.response.data.detail)
+            reject(err.response.data.detail)
+          })
+      })
     },
     getNotes() {
       this.topic_list.forEach((element) => {
@@ -101,12 +121,29 @@ export default {
         noteListApi(data)
           .then((res) => {
             element.notes = res.data
-            console.log(this.topic_list)
+            // console.log(this.topic_list)
           })
           .catch((err) => {
-            console.log(err.response.data.detail)
+            if (err.response != undefined) {
+              console.log(err.response.data.detail)
+            } else {
+              console.log(err)
+            }
           })
       })
+    },
+    addNoteRefresh() {
+      this.refresh()
+    },
+    refresh() {
+      this.getTopicList()
+        .then((res) => {
+          console.log(res)
+          this.$refs.NoteList.getTopicList(this.topic_list)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
   },
   computed: {
@@ -117,13 +154,13 @@ export default {
   watch: {
     loginState() {
       if (this.loginState) {
-        this.getTopicList()
+        this.refresh()
       }
     },
   },
   mounted() {
     if (this.$store.getters.hasLogin) {
-      this.getTopicList()
+      this.refresh()
     }
   },
 }

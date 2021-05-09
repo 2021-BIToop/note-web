@@ -4,7 +4,7 @@
       <Header></Header>
     </el-header>
     <el-container>
-      <el-aside width="250px">
+      <el-aside width="300px">
         <Sider></Sider>
       </el-aside>
       <el-main>Main</el-main>
@@ -43,6 +43,9 @@ export default {
   background-color: #d3dce6;
   color: #333;
   text-align: center;
+}
+.el-aside::-webkit-scrollbar {
+  display: none; /*隐藏滚动条*/
 }
 
 .el-main {

@@ -10,6 +10,7 @@ const base = {
   add_topic: "/add_topic/",
   topic_id: "/topic/",
   topics: "/topic_list/",
+  update_topic: "/update_topic/",
   add_note: "/add_note/",
   note_id: "/note/",
   notes: "/note_list/",
@@ -99,6 +100,24 @@ export function noteListApi(query) {
     url: base.notes,
     method: "get",
     params: query,
+    responseType: "json",
+  })
+}
+
+export function addNoteApi(query) {
+  return request({
+    url: base.add_note,
+    method: "post",
+    data: query,
+    responseType: "json",
+  })
+}
+
+export function updateTopicApi(query) {
+  return request({
+    url: base.update_topic,
+    method: "post",
+    data: query,
     responseType: "json",
   })
 }

@@ -30,4 +30,7 @@ html {
   height: 100%;
   margin-block: 0;
 }
+body::-webkit-scrollbar {
+  display: none; /*隐藏滚动条*/
+}
 </style>
