@@ -7,7 +7,9 @@
       <el-aside width="300px">
         <Sider></Sider>
       </el-aside>
-      <el-main>Main</el-main>
+      <el-main>
+        <Main></Main>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -16,12 +18,13 @@
 // @ is an alias to /src
 import Header from "components/Header.vue"
 import Sider from "components/Sider.vue"
-
+import Main from "components/Main.vue"
 export default {
   name: "Home",
   components: {
     Header,
     Sider,
+    Main,
   },
 }
 </script>
