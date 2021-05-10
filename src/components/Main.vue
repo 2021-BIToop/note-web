@@ -3,6 +3,7 @@
     <tinymce-editor
       ref="editor"
       v-model="msg"
+      :value="msg"
       :disabled="disabled"
       :base-url="baseUrl"
       :language="language"
@@ -24,7 +25,7 @@ export default {
   },
   data() {
     return {
-      msg: "Welcome to Use Tinymce Editor-liubing.me",
+      msg: "请输入内容",
       disabled: false,
       baseUrl: process.env.NODE_ENV === "production" ? "/vue-use-tinymce" : "",
       language: "zh_CN",
@@ -32,6 +33,9 @@ export default {
     }
   },
   methods: {
+    showContent(note) {
+      this.msg = note.content
+    },
     onClick(e, editor) {
       console.log("Element clicked")
       console.log(e)

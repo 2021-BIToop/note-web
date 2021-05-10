@@ -5,10 +5,10 @@
     </el-header>
     <el-container>
       <el-aside width="300px">
-        <Sider></Sider>
+        <Sider @showContent="showContent"></Sider>
       </el-aside>
       <el-main>
-        <Main></Main>
+        <Main ref="main"></Main>
       </el-main>
     </el-container>
   </el-container>
@@ -25,6 +25,11 @@ export default {
     Header,
     Sider,
     Main,
+  },
+  methods: {
+    showContent(note) {
+      this.$refs.Main.showContent(note)
+    },
   },
 }
 </script>

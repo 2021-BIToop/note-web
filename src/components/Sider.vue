@@ -31,6 +31,7 @@
       ref="NoteList"
       @refresh="refresh"
       @editTopicName="editTopicName"
+      @showContent="showContent"
     ></NoteList>
   </div>
 </template>
@@ -52,6 +53,9 @@ export default {
   },
   methods: {
     search() {},
+    showContent(note) {
+      this.$emit("showContent", note)
+    },
     editTopicName(cat) {
       let data = {
         topic_id: cat.topic_id,

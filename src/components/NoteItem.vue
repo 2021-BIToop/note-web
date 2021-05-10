@@ -30,7 +30,9 @@ export default {
     return {}
   },
   methods: {
-    showContent() {},
+    showContent() {
+      this.$emit("showContent", this.note)
+    },
     deleteNote() {
       this.$emit("deleteNote", {
         user_id: this.note.user_id,

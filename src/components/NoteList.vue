@@ -45,6 +45,7 @@
         :note="note"
         :time="date(note.modified_time)"
         @deleteNote="deleteNote"
+        @showContent="showContent"
       >
       </NoteItem>
     </el-collapse-item>
@@ -94,6 +95,9 @@ export default {
     }
   },
   methods: {
+    showContent(note) {
+      this.$emit("showContent", note)
+    },
     editTopicName(cat) {
       this.isEdit = false
       this.$emit("editTopicName", cat)
