@@ -1,6 +1,8 @@
 <template>
   <el-row>
-    <el-col :span="6"> LOGO</el-col>
+    <el-col :span="6">
+      <span style="font-weight: 1000; font-size: 30px">云便签</span></el-col
+    >
     <el-col :span="6" :offset="12">
       <span v-if="hasLogin">
         {{ username }}/<a href="#" @click="logout">LOGOUT</a>

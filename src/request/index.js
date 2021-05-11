@@ -16,6 +16,7 @@ const base = {
   note_id: "/note/",
   remove_note: "/remove_note/",
   notes: "/note_list/",
+  update_note: "/update_note/",
 }
 
 const request = axios.create({
@@ -118,6 +119,15 @@ export function addNoteApi(query) {
 export function updateTopicApi(query) {
   return request({
     url: base.update_topic,
+    method: "post",
+    data: query,
+    responseType: "json",
+  })
+}
+
+export function updateNoteApi(query) {
+  return request({
+    url: base.update_note,
     method: "post",
     data: query,
     responseType: "json",

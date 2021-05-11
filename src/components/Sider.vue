@@ -54,7 +54,7 @@ export default {
   methods: {
     search() {},
     showContent(note) {
-      this.$emit("showContent", note)
+      this.$emit("showContent", { note: note, topic_list: this.topic_list })
     },
     editTopicName(cat) {
       let data = {

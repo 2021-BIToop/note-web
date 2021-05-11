@@ -8,7 +8,7 @@
         <Sider @showContent="showContent"></Sider>
       </el-aside>
       <el-main>
-        <Main ref="main"></Main>
+        <Main ref="Main"></Main>
       </el-main>
     </el-container>
   </el-container>
@@ -27,8 +27,8 @@ export default {
     Main,
   },
   methods: {
-    showContent(note) {
-      this.$refs.Main.showContent(note)
+    showContent(data) {
+      this.$refs.Main.showContent(data)
     },
   },
 }
@@ -41,8 +41,8 @@ export default {
 }
 .el-header,
 .el-footer {
-  background-color: #b3c0d1;
-  color: #333;
+  background-color: #27bb60;
+  color: #fafafa;
   text-align: center;
   line-height: 60px;
 }

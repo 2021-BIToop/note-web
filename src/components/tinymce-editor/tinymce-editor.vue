@@ -59,7 +59,7 @@ export default {
         content_css: `${this.baseUrl}/tinymce/skins/content/default/content.css`,
         // skin_url: `${this.baseUrl}/tinymce/skins/ui/oxide-dark`, // 暗色系
         // content_css: `${this.baseUrl}/tinymce/skins/content/dark/content.css`, // 暗色系
-        height: 300,
+        height: 450,
         plugins: this.plugins,
         toolbar: this.toolbar,
         branding: false,
@@ -87,6 +87,9 @@ export default {
     // 可以添加一些自己的自定义事件，如清空内容
     clear() {
       this.myValue = ""
+    },
+    getContent() {
+      return this.myValue
     },
   },
   watch: {
