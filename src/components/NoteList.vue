@@ -15,7 +15,7 @@
           @blur="editTopicName(cat)"
         >
         </el-input>
-        <span v-else>{{ cat.name }}</span>
+        <span style="margin-left: 15px" v-else>{{ cat.name }}</span>
       </template>
       <div class="description_bar">
         <el-row>

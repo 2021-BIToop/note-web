@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-row class="search_bar">
+    <!-- <el-row class="search_bar">
       <el-col :span="18">
         <el-input size="mini" v-model="search_key"></el-input>
       </el-col>
@@ -12,7 +12,7 @@
           @click="search"
         ></el-button>
       </el-col>
-    </el-row>
+    </el-row> -->
     <el-row class="control_bar">
       <el-button
         icon="el-icon-refresh"
