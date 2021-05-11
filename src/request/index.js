@@ -1,7 +1,7 @@
 import axios from "axios"
 
-const HOST = "/host"
-// const HOST = "http://10.1.139.94/"
+// const HOST = "/host"
+const HOST = "http://10.1.139.94/"
 
 const base = {
   sign_up: "/sign_up/",
