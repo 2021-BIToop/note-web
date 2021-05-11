@@ -10,7 +10,7 @@ module.exports = {
     proxy: {
       "/host": {
         // 此处的写法，目的是为了 将 /host 替换成 https://www.baidu.com/
-        target: "http://10.1.139.94/",
+        target: "http://10.1.139.94:3000/",
         // 允许跨域
         changeOrigin: true,
         ws: true,
